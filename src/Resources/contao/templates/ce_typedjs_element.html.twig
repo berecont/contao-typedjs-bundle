@@ -1,0 +1,36 @@
+
+
+{% block content %}
+
+<div class="{{ class }} typedjs-item" {{ cssID|raw }}>
+
+    {% if headline %}
+    <{{ hl }}>{{ headline }}</{{ hl }}>
+    {% endif %}
+
+    {% if elementParagraph is defined and elementParagraph is not empty %}
+      {{ elementParagraph|raw }}
+    {% endif %}
+    <span id="{{ elementId|raw }}"></span>
+
+</div>
+
+  <script>
+    var typed = new Typed('#{{ elementId|raw }}', {
+      strings: [{{ elementStrings|raw }}],
+      typeSpeed: {{ elementTypespeed }},
+      
+      {% if elementStartdelay is defined and elementStartdelay is not empty %}
+      startDelay: {{ elementStartdelay|raw }},
+      {% endif %}
+
+      {% if elementOptions is defined and elementOptions is not empty %}
+      {% for key, value in elementOptions %}
+        {{ key }}: {{ value|json_encode|raw }},
+      {% endfor %}
+      {% endif %}
+    });
+  </script>
+
+{% endblock %}
+

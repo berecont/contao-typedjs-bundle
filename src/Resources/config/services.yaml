@@ -1,0 +1,10 @@
+services:
+    Berecont\ContaoTypedjsBundle\Controller\ContentElement\TypedjsElementController:
+        tags:
+            - { name: contao.content_element, category: texts, template: ce_typedjs_element, type: typedjs_element }
+            - { name: container.service_subscriber }
+        public: true
+    _instanceof:
+      Symfony\Bundle\FrameworkBundle\Controller\AbstractController:
+        calls:
+            - [ setContainer, [ '@Psr\Container\ContainerInterface' ] ]
